@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Back - Login</title>
+    <meta
+      name="description"
+      content="A beautiful, responsive login page to access your account."
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Phosphor Icons for high quality UI icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Animated Background Shapes -->
+    <div class="background-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Login Card container -->
+    <main class="login-container">
+      <!-- Logo and Heading -->
+      <header class="login-header">
+        <div class="logo">
+          <i class="ph-fill ph-infinity"></i>
+        </div>
+        <h1>Welcome Back</h1>
+        <p>Please enter your details to sign in.</p>
+      </header>
+
+      <!-- Login Form -->
+      <form class="login-form" novalidate>
+        <!-- Email Input -->
+        <div class="input-group">
+          <label for="email">Email</label>
+          <div class="input-wrapper">
+            <i class="ph ph-envelope"></i>
+            <input
+              type="email"
+              id="email"
+              placeholder="hello@example.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <i class="ph ph-lock-key"></i>
+            <input
+              type="password"
+              id="password"
+              placeholder="••••••••"
+              required
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              aria-label="Toggle password visibility"
+            >
+              <i class="ph ph-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Extra actions: Remember Me and Forgot Password -->
+        <div class="form-actions">
+          <label class="remember-me" for="remember">
+            <input type="checkbox" id="remember" />
+            <span class="checkmark"></span>
+            <span>Remember for 30 days</span>
+          </label>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <!-- Submit Buttons -->
+        <button type="submit" class="btn-submit">Sign In</button>
+        <button type="button" class="btn-google">
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google"
+            class="google-icon"
+          />
+          Sign in with Google
+        </button>
+      </form>
+
+      <!-- Footer link -->
+      <footer class="login-footer">
+        <p>Don't have an account? <a href="register.html">Sign up</a></p>
+      </footer>
+    </main>
+
+    <!-- Page Footer -->
+    <div class="page-footer">
+      <div class="footer-content">
+        <i class="ph ph-copyright"></i>
+        <span>Barcelona Daniel</span>
+        <span class="footer-year">2026</span>
+      </div>
+    </div>
+
+    <!-- Simple JavaScript to toggle password visibility -->
+    <script>
+      const toggleBtn = document.querySelector(".password-toggle");
+      const passwordInput = document.querySelector("#password");
+      const eyeIcon = toggleBtn.querySelector("i");
+      const form = document.querySelector(".login-form");
+
+      // Toggle password visibility
+      toggleBtn.addEventListener("click", () => {
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+        // Change icon based on state
+        eyeIcon.className =
+          type === "password" ? "ph ph-eye" : "ph ph-eye-slash";
+      });
+
+      // Prevent default form submission to showcase the UI state
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const submitBtn = document.querySelector(".btn-submit");
+        const originalText = submitBtn.textContent;
+
+        // Simple button animation to simulate loading state
+        submitBtn.innerHTML =
+          '<i class="ph ph-spinner ph-spin"></i> Signing in...';
+        submitBtn.style.opacity = "0.8";
+        submitBtn.style.pointerEvents = "none";
+
+        setTimeout(() => {
+          submitBtn.textContent = originalText;
+          submitBtn.style.opacity = "1";
+          submitBtn.style.pointerEvents = "auto";
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>
