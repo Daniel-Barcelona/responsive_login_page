@@ -581,3 +581,182 @@ body {
     height: 48px;
   }
 }
+
+/* ------------------------
+   Pure CSS Interactivity
+------------------------ */
+/* Password Toggle Hack */
+.toggle-checkbox {
+  display: none;
+}
+
+.password-input {
+  -webkit-text-security: disc;
+}
+
+.toggle-checkbox:checked + .password-input {
+  -webkit-text-security: none;
+}
+
+.password-toggle {
+  cursor: pointer;
+}
+
+.password-toggle .hide-icon {
+  display: none;
+}
+
+.toggle-checkbox:checked ~ .password-toggle .ph-eye {
+  display: none;
+}
+
+.toggle-checkbox:checked ~ .password-toggle .hide-icon {
+  display: block;
+}
+
+/* Submit Simulation Hack */
+.submit-toggle {
+  display: none;
+}
+
+.btn-submit {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.btn-text,
+.btn-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-loading {
+  opacity: 0;
+}
+
+/* Login Submit Animations */
+#login-submit:checked ~ .btn-submit .btn-text {
+  animation: hideTextSim 1.5s forwards;
+}
+
+#login-submit:checked ~ .btn-submit .btn-loading {
+  animation: showLoadingSim 1.5s forwards;
+}
+
+#login-submit:checked ~ .btn-submit {
+  animation: btnLoadingSim 1.5s forwards;
+}
+
+@keyframes hideTextSim {
+  0%,
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes showLoadingSim {
+  0%,
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes btnLoadingSim {
+  0%,
+  99% {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Register Submit Animations */
+#register-submit:checked ~ .btn-submit .btn-text {
+  opacity: 0;
+}
+
+#register-submit:checked ~ .btn-submit .btn-loading {
+  opacity: 1;
+}
+
+#register-submit:checked ~ .btn-submit {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Success Redirect Overlay */
+.redirect-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.redirect-overlay h2 {
+  color: var(--text-main);
+  font-size: 24px;
+  text-align: center;
+}
+
+.redirect-overlay i {
+  font-size: 48px;
+  color: #10b981; /* Emerald/Success color */
+  margin-bottom: 8px;
+}
+
+.redirect-btn {
+  background: var(--primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.redirect-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+#register-submit:checked ~ .redirect-overlay {
+  animation: fadeInRedirect 0.4s 1.5s forwards;
+}
+
+@keyframes fadeInRedirect {
+  to {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
