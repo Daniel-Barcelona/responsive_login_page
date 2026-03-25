@@ -61,19 +61,26 @@
           <div class="input-wrapper">
             <i class="ph ph-lock-key"></i>
             <input
-              type="password"
+              type="checkbox"
+              id="toggle-password"
+              class="toggle-checkbox"
+            />
+            <input
+              type="text"
               id="password"
+              class="password-input"
               placeholder="••••••••"
               required
               autocomplete="current-password"
             />
-            <button
-              type="button"
+            <label
+              for="toggle-password"
               class="password-toggle"
               aria-label="Toggle password visibility"
             >
               <i class="ph ph-eye"></i>
-            </button>
+              <i class="ph ph-eye-slash hide-icon"></i>
+            </label>
           </div>
         </div>
 
@@ -88,7 +95,13 @@
         </div>
 
         <!-- Submit Buttons -->
-        <button type="submit" class="btn-submit">Sign In</button>
+        <input type="checkbox" id="login-submit" class="submit-toggle" />
+        <label for="login-submit" class="btn-submit">
+          <span class="btn-text">Sign In</span>
+          <span class="btn-loading"
+            ><i class="ph ph-spinner ph-spin"></i> Signing in...</span
+          >
+        </label>
         <button type="button" class="btn-google">
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -113,44 +126,5 @@
         <span class="footer-year">2026</span>
       </div>
     </div>
-
-    <!-- Simple JavaScript to toggle password visibility -->
-    <script>
-      const toggleBtn = document.querySelector(".password-toggle");
-      const passwordInput = document.querySelector("#password");
-      const eyeIcon = toggleBtn.querySelector("i");
-      const form = document.querySelector(".login-form");
-
-      // Toggle password visibility
-      toggleBtn.addEventListener("click", () => {
-        const type =
-          passwordInput.getAttribute("type") === "password"
-            ? "text"
-            : "password";
-        passwordInput.setAttribute("type", type);
-        // Change icon based on state
-        eyeIcon.className =
-          type === "password" ? "ph ph-eye" : "ph ph-eye-slash";
-      });
-
-      // Prevent default form submission to showcase the UI state
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const submitBtn = document.querySelector(".btn-submit");
-        const originalText = submitBtn.textContent;
-
-        // Simple button animation to simulate loading state
-        submitBtn.innerHTML =
-          '<i class="ph ph-spinner ph-spin"></i> Signing in...';
-        submitBtn.style.opacity = "0.8";
-        submitBtn.style.pointerEvents = "none";
-
-        setTimeout(() => {
-          submitBtn.textContent = originalText;
-          submitBtn.style.opacity = "1";
-          submitBtn.style.pointerEvents = "auto";
-        }, 1500);
-      });
-    </script>
   </body>
 </html>
